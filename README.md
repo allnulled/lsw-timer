@@ -19,7 +19,7 @@ require("@allnulled/lsw-timer");
 Y en html tienes que:
 
 ```html
-<script src="node_modules/@allnulled/lsw-timer/timeformat.api.js"></script>
+<script src="node_modules/@allnulled/lsw-timer/timeformat.js"></script>
 ```
 
 ## Uso
