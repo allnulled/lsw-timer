@@ -5,7 +5,7 @@
   "main": "timeformat.api.js",
   "scripts": {
     "up": "npm run build && bash up.sh",
-    "build": "npx pegjs --format globals --export-var Timeformat_parser -o timeformat.js timeformat.pegjs && node fix1.js && npm run test",
+    "build": "npx pegjs --format globals --export-var Timeformat_parser -o timeformat.js timeformat.pegjs && node fix1.js",
     "test": "node test.js"
   },
   "keywords": [

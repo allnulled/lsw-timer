@@ -1,25 +1,25 @@
-# lsw-timeformat
+# lsw-timer
 
 Parser simple para fecha, hora, rango, duración y lista.
 
-Branch of [@allnulled/timeformat](https://github.com/allnulled/timeformat).
+Branch of [@allnulled/timer](https://github.com/allnulled/timer).
 
 ## Instalación
 
 ```sh
-npm i -s @allnulled/lsw-timeformat
+npm i -s @allnulled/lsw-timer
 ```
 
 Y en node.js ya puedes:
 
 ```js
-require("@allnulled/lsw-timeformat");
+require("@allnulled/lsw-timer");
 ```
 
 Y en html tienes que:
 
 ```html
-<script src="node_modules/@allnulled/lsw-timeformat/lsw-timeformat.js"></script>
+<script src="node_modules/@allnulled/lsw-timer/timeformat.api.js"></script>
 ```
 
 ## Uso
