@@ -1,3 +1,4 @@
-`v1.0.2`
-  - ahora los meses en duraciones se escriben con `0mon`
-  - esto evita la confusión con `min` y con `ms`
+# CHANGELOG
+
+Changelog file of project [@allnulled/lsw-timer](https://github.com/allnulled/lsw-timer.git) on [https://github.com/allnulled/lsw-timer.git](https://github.com/allnulled/lsw-timer.git).
+
