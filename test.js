@@ -1,4 +1,4 @@
-require(__dirname + "/timeformat.js");
+require(__dirname + "/timeformat.bundled.js");
 
 const main = async function () {
   try {

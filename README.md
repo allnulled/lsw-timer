@@ -2,7 +2,7 @@
 
 Parser simple para fecha, hora, rango, duración y lista.
 
-Branch of [@allnulled/timer](https://github.com/allnulled/timer).
+Branch of [@allnulled/timeformat](https://github.com/allnulled/timeformat).
 
 ## Instalación
 
