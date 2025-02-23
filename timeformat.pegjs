@@ -38,7 +38,7 @@ Momento
   / Hora
 
 FechaHora
-  = fecha:SoloFecha "+" hora:Hora {
+  = fecha:SoloFecha ("+"/" ") hora:Hora {
       delete fecha.tipo;
       delete hora.tipo;
       return { tipo: "FechaHora", ...fecha, ...hora };
