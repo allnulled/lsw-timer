@@ -19,7 +19,31 @@
     return `${hora}:${minuto}`;
   };
 
+  Timeformat_utils.formatDatestringFromDate = function (dateObject, setUntilDay = false, setMeridian = false) {
+    if(typeof dateObject === "undefined") {
+      return undefined;
+    }
+    const anio = ("" + (dateObject.getFullYear() ?? 0)).padStart(4, '0');
+    const mes = ("" + ((dateObject.getMonth() ?? 0) + 1)).padStart(2, '0');
+    const dia = ("" + (dateObject.getDate() ?? 0)).padStart(2, '0');
+    if(setUntilDay) {
+      return `${anio}/${mes}/${dia}`;
+    }
+    const hora = ("" + (dateObject.getHours() ?? 0)).padStart(2, '0');
+    const minuto = ("" + (dateObject.getMinutes() ?? 0)).padStart(2, '0');
+    return `${anio}/${mes}/${dia} ${hora}:${minuto}${setMeridian ? hora >= 12 ? 'pm' : 'am' : ''}`;
+  };
+
   Timeformat_utils.formatHourFromMomento = function (momentoBrute, setMeridian = false) {
+    const momento = Timeformat_utils.toPlainObject(momentoBrute);
+    const hora = ("" + (momento.hora ?? 0)).padStart(2, '0');
+    const minuto = ("" + (momento.minuto ?? 0)).padStart(2, '0');
+    return `${hora}:${minuto}${setMeridian ? hora >= 12 ? 'pm' : 'am' : ''}`;
+  };
+
+  Timeformat_utils.formatHourFromMomentoCode = function (momentoCode, setMeridian = false) {
+    const momentoBruteList = Timeformat_parser.parse(momentoCode);
+    const momentoBrute = momentoBruteList[0];
     const momento = Timeformat_utils.toPlainObject(momentoBrute);
     const hora = ("" + (momento.hora ?? 0)).padStart(2, '0');
     const minuto = ("" + (momento.minuto ?? 0)).padStart(2, '0');
