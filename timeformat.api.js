@@ -34,6 +34,37 @@
     return `${anio}/${mes}/${dia} ${hora}:${minuto}${setMeridian ? hora >= 12 ? 'pm' : 'am' : ''}`;
   };
 
+  Timeformat_utils.getDateFromMomentoText = function (momentoText, setMeridian = false) {
+    const momentoBrute = Timeformat_parser.parse(momentoText)[0];
+    console.log(momentoBrute);
+    const date = new Date();
+    console.log(1, date);
+    if(momentoBrute.anio) {
+      date.setFullYear(momentoBrute.anio);
+      if(momentoBrute.mes === 0) {
+        throw new Error("Cannot set «mes» to «0» in momento text on «LswTimer.utils.getDateFromMomentoText»");
+      }
+      date.setMonth((momentoBrute.mes-1) || 0);
+      date.setDate(momentoBrute.dia || 0);
+    }
+    date.setHours(momentoBrute.hora || 0);
+    date.setMinutes(momentoBrute.minuto || 0);
+    date.setSeconds(momentoBrute.segundo || 0);
+    date.setMilliseconds(0);
+    console.log("Z", date);
+    return date;
+  };
+  
+  Timeformat_utils.formatDatetimeFromMomento = function (momentoBrute, setMeridian = false) {
+    const momento = Timeformat_utils.toPlainObject(momentoBrute);
+    const anio = ("" + (momento.anio ?? 0)).padStart(4, '0');
+    const mes = ("" + (momento.mes ?? 0)).padStart(2, '0');
+    const dia = ("" + (momento.dia ?? 0)).padStart(2, '0');
+    const hora = ("" + (momento.hora ?? 0)).padStart(2, '0');
+    const minuto = ("" + (momento.minuto ?? 0)).padStart(2, '0');
+    return `${anio}/${mes}/${dia} ${hora}:${minuto}${setMeridian ? hora >= 12 ? 'pm' : 'am' : ''}`;
+  };
+
   Timeformat_utils.formatHourFromMomento = function (momentoBrute, setMeridian = false) {
     const momento = Timeformat_utils.toPlainObject(momentoBrute);
     const hora = ("" + (momento.hora ?? 0)).padStart(2, '0');
@@ -81,7 +112,22 @@
     try {
       const ast = Timeformat_parser.parse(text);
       const mainExpression = ast[0];
-      if (mainExpression.tipo === "Duracion") {
+      if (mainExpression.tipo !== "Duracion") {
+        throw new Error(`Expression of type «${mainExpression.tipo}» is not valid. ${errorMessage}`);
+      }
+    } catch (error) {
+      console.log(text);
+      throw new Error(errorMessage);
+    }
+    return true;
+  };
+
+  Timeformat_utils.isDatetimeOrThrow = function (text) {
+    const errorMessage = "It must be a datetime only, like 2025/01/01 00:00";
+    try {
+      const ast = Timeformat_parser.parse(text);
+      const mainExpression = ast[0];
+      if (mainExpression.tipo !== "FechaHora") {
         throw new Error(errorMessage);
       }
     } catch (error) {
@@ -117,6 +163,37 @@
     }
     return true;
   };
+
+  Timeformat_utils.formatDateToSpanish = function(date) {
+    const anio = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const weekday = date.getDay();
+    const diaSemana = (() => {
+      if(weekday === 0) return "Domingo";
+      if(weekday === 1) return "Lunes";
+      if(weekday === 2) return "Martes";
+      if(weekday === 3) return "Miércoles";
+      if(weekday === 4) return "Jueves";
+      if(weekday === 5) return "Viernes";
+      if(weekday === 6) return "Sábado";
+    })();
+    const mes = (() => {
+      if(month === 0) return "Enero";
+      if(month === 1) return "Febrero";
+      if(month === 2) return "Marzo";
+      if(month === 3) return "Abril";
+      if(month === 4) return "Mayo";
+      if(month === 5) return "Junio";
+      if(month === 6) return "Julio";
+      if(month === 7) return "Agosto";
+      if(month === 8) return "Septiembre";
+      if(month === 9) return "Octubre";
+      if(month === 10) return "Noviembre";
+      if(month === 11) return "Diciembre";
+    })();
+    return `${diaSemana}, ${day} de ${mes} del ${anio}`;
+  }
 
   return {
     parser: Timeformat_parser,

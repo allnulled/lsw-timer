@@ -176,10 +176,10 @@
               return { tipo: "Hora", hora, minuto, segundo, milisegundo };
             },
         peg$c20 = function(hora, minuto, segundo) {
-              return { tipo: "Hora", hora, minuto, segundo };
+              return { tipo: "Hora", hora, minuto, segundo, milisegundo: 0 };
             },
         peg$c21 = function(hora, minuto) {
-              return { tipo: "Hora", hora, minuto };
+              return { tipo: "Hora", hora, minuto, segundo: 0, milisegundo: 0 };
             },
         peg$c22 = function(partes) {
               return { tipo: "Duracion", ...recomponer_objeto(partes) };

@@ -54,10 +54,10 @@ Hora
       return { tipo: "Hora", hora, minuto, segundo, milisegundo };
     }
   / hora:HoraExacta ":" minuto:Minuto ":" segundo:Segundo {
-      return { tipo: "Hora", hora, minuto, segundo };
+      return { tipo: "Hora", hora, minuto, segundo, milisegundo: 0 };
     }
   / hora:HoraExacta ":" minuto:Minuto {
-      return { tipo: "Hora", hora, minuto };
+      return { tipo: "Hora", hora, minuto, segundo: 0, milisegundo: 0 };
     }
   
 
