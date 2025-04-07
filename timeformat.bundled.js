@@ -1470,7 +1470,7 @@
 
   Timeformat_utils.formatDateToSpanish = function(date) {
     const anio = date.getFullYear();
-    const month = date.getMonth() + 1;
+    const month = date.getMonth();
     const day = date.getDate();
     const weekday = date.getDay();
     const diaSemana = (() => {
@@ -1497,6 +1497,39 @@
       if(month === 11) return "Diciembre";
     })();
     return `${diaSemana}, ${day} de ${mes} del ${anio}`;
+  }
+
+  Timeformat_utils.formatMomentoObjectToMomentoString = function(momento) {
+    let out = "";
+    const { anio = false, mes = false, dia = false, hora = false, minuto = false, segundo = false, milisegundo = false } = momento;
+    if(anio !== false) {
+      out += ("" + anio).padStart(4, '0');
+      out += "/";
+    }
+    if(mes !== false) {
+      out += ("" + mes).padStart(2, '0');
+      out += "/";
+    }
+    if(dia !== false) {
+      out += ("" + dia).padStart(2, '0');
+      out += " ";
+    }
+    if(hora !== false) {
+      out += ("" + hora).padStart(2, '0');
+      out += ":";
+    }
+    if(minuto !== false) {
+      out += ("" + minuto).padStart(2, '0');
+      out += ":";
+    }
+    if(segundo !== false) {
+      out += ("" + segundo).padStart(2, '0');
+      out += ".";
+    }
+    if(milisegundo !== false) {
+      out += ("" + milisegundo).padStart(3, '0');
+    }
+    return out.trim();
   }
 
   return {
